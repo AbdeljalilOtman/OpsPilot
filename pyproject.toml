@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling>=1.25,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "opspilot"
+version = "0.1.0"
+description = "A synthetic service-operations intelligence and automation prototype."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "alembic>=1.13,<2",
+  "fastapi>=0.115,<1",
+  "pydantic-settings>=2.5,<3",
+  "sqlalchemy>=2.0,<3",
+  "uvicorn[standard]>=0.30,<1",
+  "itsdangerous>=2.2,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx>=0.27,<1",
+  "mypy>=1.11,<2",
+  "pytest>=8.3,<9",
+  "ruff>=0.6,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/opspilot"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = "src"
+strict = true
+plugins = ["pydantic.mypy"]
+
+[tool.hatch.envs.default]
+features = ["dev"]
+
+[tool.hatch.envs.default.scripts]
+lint = "ruff check ."
+typecheck = "mypy src"
+test = "pytest"

@@ -1,0 +1,17 @@
+sla_clock: continuous_elapsed_hours_utc
+services:
+  account_access:
+    owning_team: identity_support
+    sla_hours: 24
+  software_request:
+    owning_team: workplace_apps
+    sla_hours: 72
+  purchase_request:
+    owning_team: procurement_ops
+    sla_hours: 120
+  data_reporting:
+    owning_team: analytics_support
+    sla_hours: 48
+  policy_question:
+    owning_team: service_desk
+    sla_hours: 24
